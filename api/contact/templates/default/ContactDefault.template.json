@@ -1,0 +1,9 @@
+{
+  "default": {
+    "attributes": {
+      "client": {},
+      "message": {}
+    },
+    "displayedAttribute": "client"
+  }
+}

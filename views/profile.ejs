@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Log in</title>
+
+    <!-- Bootstrap core CSS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div>
+<%- include('partials/navbar') %>
+</div>
+
+<body lang="en">
+<section>
+  <div class="wrapper">
+    <script>
+
+      /*    $.ajax({
+            url: "http://localhost:1337/user/me",
+            type: 'GET',
+            dataType: 'json',
+            headers: {
+              'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("jwtToken"))
+            },
+            contentType: 'application/json; charset=utf-8',
+            done: function (result) {
+              console.log(data)
+              $('p').append(result.email);
+              // CallBack(result);
+              console.log(result)
+              //window.location.replace("/me.html");
+            },
+            fail: function (error) {
+
+            }
+          });
+*/
+  /*   $.ajax({
+        url: "http://localhost:1337/user/"+JSON.parse(sessionStorage.getItem("userId")),
+        type: 'GET',
+        dataType: 'json',
+        headers: {
+          'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
+          //Authorization: 'Bearer '+ sessionStorage.getItem("jwtToken")
+        },
+        contentType: 'application/json; charset=utf-8',
+        success: function (result) {
+          $('#email').append(result.email);
+          $('#userId').append(result.email);
+          console.log(result);
+          findOrders(result._id);
+          //window.location.replace("/me.html");
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });*/
+  //    function findOrders() {
+
+  function newLocation(adURL){
+  window.location.href = "/orderdetails2/"+adURL;
+  }
+     $.ajax({
+       //url: "http://localhost:1337/order"+JSON.parse(sessionStorage.getItem("userId")),
+       url: "http://localhost:1337/order?where=\{%22client%22:%22" + JSON.parse(sessionStorage.getItem("userId"))+ "%22\}",
+    //  url: "http://localhost:1337/order?clientId=5a71c0e096473f03f1a86624",
+      type: 'GET',
+      //dataType: 'json',
+      headers: {
+        'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
+      },
+      data:{
+      //"where": {"client":JSON.parse(sessionStorage.getItem("userId"))}
+      //http://localhost:1337/order?where={%22client%22:%225a7468afd444971921a80b22%22}
+      //  client: JSON.parse(sessionStorage.getItem("userId"))
+      },
+      //contentType: 'application/json; charset=utf-8',
+      success: function (order) {
+        console.log(JSON.stringify(order));
+       order.forEach(function(item,index){
+                  console.log(item.client);
+          $('#orderInfo').append('<tr>'+
+      '<td><a href="/orderdetails2/'+item.id+'">'+item.id+'</a></td>'+
+      '<td>'+item.product+'</td>'+
+      '<td>'+item.status+'</td>'+
+      '<td>'+item.employee.email+'</td>'+
+      '</tr>')
+    });
+      //  $('#product').append(order[0].product);
+        //window.location.replace("/me.html");
+      },
+      error: function (error) {
+        console.log(JSON.parse(sessionStorage.getItem("jwtToken")));
+
+      }
+    });
+//}
+    </script>
+
+    <h2 class="text-center"> Orders </h2>
+    <div class="container">
+        <div class="center-block">
+            <div class="col-xs-4 col-xs-offset-8 center">
+    <table id="orderInfo" name="orderInfo" class="table table-bordered">
+      <thead class="thead-default">
+        <th>ID</th>
+        <th>Product</th>
+        <th>Status</th>
+        <th>Employee</th>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <input type="hidden" id="userId" name="userId">
+
+    </div>
+  </div>
+  </div>
+</section>
+</body>
+</html>

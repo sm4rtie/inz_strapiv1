@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Log in</title>
+
+    <!-- Bootstrap core CSS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div>
+<%- include('partials/navbar') %>
+</div>
+<script>
+//$(document).ready(function(){
+  $.ajax({
+     url: "/user/"+JSON.parse(sessionStorage.getItem("userId")),
+     type: 'GET',
+     dataType: 'json',
+     headers: {
+       'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
+       //Authorization: 'Bearer '+ sessionStorage.getItem("jwtToken")
+     },
+     contentType: 'application/json; charset=utf-8',
+     success: function (result) {
+       //console.log(result);
+       $('#email').val(result.email);
+       $('#firstName').val(result.firstName);
+      $('#lastName').val(result.lastName);
+      $('#phone').val(result.phone);
+      $('#username').val(result.username);
+      $('#email').val(result.email);
+
+       //window.location.replace("/me.html");
+     },
+     error: function (error) {
+       console.log(error);
+     }
+   });
+ //});
+   </script>
+<div class="center-block">
+<form class="needs-validation" novalidate id="editForm" action="">
+<div class="form-group row">
+  <label for="firstName" class="col-2 col-form-label">First Name</label>
+  <div class="col-10">
+    <input class="form-control" type="text" id="firstName" name="firstName">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="lastName" class="col-2 col-form-label">Last Name</label>
+  <div class="col-10">
+    <input class="form-control" type="text" name="lastName" id="lastName">
+  </div>
+</div>
+<div class="form-group row">
+  <div class="col-10">
+    <input class="form-control" type="hidden" id="email" name="email">
+    <input class="form-control" type="hidden" id="username" name="username">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="phone" class="col-2 col-form-label">Phone</label>
+  <div class="col-10">
+    <input class="form-control" type="tel" id="phone" name="phone">
+  </div>
+</div>
+  <!--<div class="form-group row">
+  <label for="password" class="col-2 col-form-label">Password</label>
+<div class="col-10">
+    <input class="form-control" type="password" value="" id="currentPassword" name="password">
+  </div>
+</div>-->
+  <div class="form-group row">
+    <label for="newPassword" class="col-2 col-form-label">New Password</label>
+    <div class="col-10">
+      <input class="form-control" type="password" value="" id="password" name="password">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="newPasswordConfirm" class="col-2 col-form-label">Confirm Password</label>
+    <div class="col-10">
+      <input class="form-control" type="password" value="" id="newPasswordConfirm" name="newPasswordConfirm">
+      <div class="invalid-feedback">
+          Passwords don't match.
+        </div>
+           </div>
+    </div>
+  <button type="button" class="btn btn-primary" onclick="updateUser()">Submit</button>
+
+</form>
+</div>
+<script>
+//$(document).ready(function(){
+//});
+function validateForm(){
+    //  $('form#editForm').submit(function(e){
+        if($('#password').val()!== $('#newPasswordConfirm').val()){
+          $('#newPasswordConfirm').addClass('is-invalid');
+   e.preventDefault();
+   e.stopPropagation();
+   alert('prevent submit');
+}
+else { updateUser(); }
+  //  });
+
+}
+
+
+function updateUser(){
+
+$.ajax({
+     url: "/user/"+JSON.parse(sessionStorage.getItem("userId")),
+   type: 'PUT',
+   headers: {
+     'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
+   },
+   data: {
+    model: 'user',
+    email: $('#email').val(),
+    firstName: $('#firstName').val(),
+    lastName: $('#lastName').val(),
+    phone: $('#phone').val(),
+    password: $('#password').val(),
+    username: $('#username').val(),
+    email: $('#email').val()
+  },
+   success: function (result) {
+     //alert('yay');
+     location.reload();
+   },
+   error: function (error) {
+    // alert('nay');
+     console.log(error);
+     //window.location = "/edituser";
+   }
+ });
+ }
+
+ </script>
+ </body>
+ </html>

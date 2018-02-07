@@ -1,0 +1,10 @@
+{
+  "default": {
+    "attributes": {
+      "date": {},
+      "state": {},
+      "version": {}
+    },
+    "displayedAttribute": "id"
+  }
+}

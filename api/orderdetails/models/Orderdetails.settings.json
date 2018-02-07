@@ -1,0 +1,59 @@
+{
+  "identity": "orderdetails",
+  "connection": "mongoconn",
+  "defaultTemplate": "default",
+  "displayedAttribute": "",
+  "schema": true,
+  "attributes": {
+    "date": {
+      "type": "date"
+    },
+    "state": {
+      "type": "text"
+    },
+    "version": {
+      "type": "integer"
+    },
+    "createdBy": {
+      "model": "user"
+    },
+    "updatedBy": {
+      "model": "user"
+    },
+    "contributors": {
+      "collection": "user",
+      "via": "orderdetails"
+    },
+    "orderId": {
+      "model": "order",
+      "required": true
+    },
+    "lang": {
+      "type": "string",
+      "required": true
+    },
+    "template": {
+      "type": "string",
+      "required": true
+    },
+    "id_ref": {
+      "type": "int"
+    }
+  },
+  "autoCreatedAt": true,
+  "autoUpdatedAt": true,
+  "migrate": "alter",
+  "templates": {
+    "default": {
+      "attributes": {
+        "date": {
+          "type": "date"
+        },
+        "state": {
+          "type": "text"
+        }
+      },
+      "displayedAttribute": "orderId"
+    }
+  }
+}

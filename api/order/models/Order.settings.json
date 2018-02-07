@@ -1,0 +1,80 @@
+{
+  "identity": "order",
+  "connection": "mongoconn",
+  "defaultTemplate": "default",
+  "displayedAttribute": "",
+  "schema": true,
+  "attributes": {
+    "product": {
+      "type": "string"
+    },
+    "started": {
+      "type": "date"
+    },
+    "status": {
+      "type": "array"
+    },
+    "ended": {
+      "type": "date"
+    },
+    "lang": {
+      "type": "string",
+      "required": true
+    },
+    "template": {
+      "type": "string",
+      "required": true
+    },
+    "id_ref": {
+      "type": "int"
+    },
+    "createdBy": {
+      "model": "user"
+    },
+    "updatedBy": {
+      "model": "user"
+    },
+    "contributors": {
+      "collection": "user",
+      "via": "orders"
+    },
+    "contact": {
+      "collection": "contact",
+      "via": "order"
+    },
+    "client": {
+      "model": "user"
+    },
+    "employee": {
+      "model": "user"
+    }
+  },
+  "autoCreatedAt": true,
+  "autoUpdatedAt": true,
+  "migrate": "alter",
+  "templates": {
+    "default": {
+      "attributes": {
+        "client": {
+          "type": "string"
+        },
+        "employee": {
+          "type": "string"
+        },
+        "product": {
+          "type": "string"
+        },
+        "started": {
+          "type": "date"
+        },
+        "status": {
+          "type": "array"
+        },
+        "ended": {
+          "type": "date"
+        }
+      },
+      "displayedAttribute": "id"
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "routes": {
+    "GET /orderdetails": {
+      "controller": "Orderdetails",
+      "action": "find",
+      "policies": [
+        "isAuthorized"
+      ]
+    },
+    "GET /orderdetails/:id": {
+      "controller": "Orderdetails",
+      "action": "findOne",
+      "policies": [
+        "isAuthorized"
+      ]
+    },
+    "GET /orderdetails2/:orderId": {
+      "controller": "Orderdetails",
+      "action": "findDetails",
+      "policies": [
+
+      ]
+    },
+    "GET /details/:orderId" : {
+      "controller": "Orderdetails",
+      "action": "showDetails",
+      "policies": [
+
+      ]
+    },
+    "POST /orderdetails": {
+      "controller": "Orderdetails",
+      "action": "create",
+      "policies": [
+        "isAuthorized",
+        "addDataCreate"
+      ]
+    },
+    "PUT /orderdetails/:id": {
+      "controller": "Orderdetails",
+      "action": "update",
+      "policies": [
+        "isAuthorized",
+        "addDataUpdate"
+      ]
+    },
+    "DELETE /orderdetails/:id": {
+      "controller": "Orderdetails",
+      "action": "destroy",
+      "policies": [
+        "isAuthorized"
+      ]
+    },
+    "POST /orderdetails/:parentId/:relation": {
+      "controller": "Orderdetails",
+      "action": "add",
+      "policies": [
+        "isAuthorized",
+        "addDataCreate"
+      ]
+    },
+    "DELETE /orderdetails/:parentId/:relation/:id": {
+      "controller": "Orderdetails",
+      "action": "remove",
+      "policies": [
+        "isAuthorized",
+        "addDataUpdate"
+      ]
+    }
+  }
+}

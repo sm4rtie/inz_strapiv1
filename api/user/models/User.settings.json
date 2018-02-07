@@ -1,0 +1,76 @@
+{
+  "identity": "user",
+  "connection": "mongoconn",
+  "schema": true,
+  "limit": 20,
+  "defaultTemplate": "default",
+  "displayedAttribute": "username",
+  "attributes": {
+    "username": {
+      "type": "string",
+      "minLength": 3,
+      "unique": true
+    },
+    "email": {
+      "type": "email",
+      "minLength": 6,
+      "unique": true
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string",
+      "minLength": 9,
+      "maxLength": 9
+    },
+    "lang": {
+      "type": "string",
+      "required": true
+    },
+    "template": {
+      "type": "string",
+      "required": true
+    },
+    "id_ref": {
+      "type": "int"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string",
+      "minLength": 6
+    },
+    "resetPasswordToken": {
+      "type": "string"
+    },
+    "roles": {
+      "collection": "role",
+      "via": "users",
+      "dominant": true
+    },
+    "contacts": {
+      "collection": "contact",
+      "via": "contributors"
+    },
+    "filesCreated": {
+      "collection": "orderdetails",
+      "via": "createdBy"
+    },
+    "orders": {
+      "collection": "order",
+      "via": "contributors"
+    },
+    "orderdetails": {
+      "collection": "orderdetails",
+      "via": "contributors"
+    }
+  },
+  "autoCreatedAt": true,
+  "autoUpdatedAt": true,
+  "migrate": "alter"
+}

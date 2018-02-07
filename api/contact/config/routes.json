@@ -1,0 +1,57 @@
+{
+  "routes": {
+    "GET /contact": {
+      "controller": "Contact",
+      "action": "find",
+      "policies": [
+        "isAuthorized"
+      ]
+    },
+    "GET /contact/:id": {
+      "controller": "Contact",
+      "action": "findOne",
+      "policies": [
+        "isAuthorized"
+      ]
+    },
+    "POST /contact": {
+      "controller": "Contact",
+      "action": "create",
+      "policies": [
+        "isAuthorized",
+        "addDataCreate"
+      ]
+    },
+    "PUT /contact/:id": {
+      "controller": "Contact",
+      "action": "update",
+      "policies": [
+        "isAuthorized",
+        "addDataUpdate"
+      ]
+    },
+    "DELETE /contact/:id": {
+      "controller": "Contact",
+      "action": "destroy",
+      "policies": [
+        "isAuthorized"
+      ]
+    },
+    "POST /contact/:parentId/:relation": {
+      "controller": "Contact",
+      "action": "add",
+      "policies": [
+        "isAuthorized",
+        "addDataCreate"
+      ]
+    },
+    "DELETE /contact/:parentId/:relation/:id": {
+      "controller": "Contact",
+      "action": "remove",
+      "policies": [
+        "isAuthorized",
+        "addDataUpdate"
+      ]
+    }
+  }
+}

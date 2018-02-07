@@ -1,0 +1,11 @@
+{
+  "default": {
+    "attributes": {
+      "product": {},
+      "started": {},
+      "status": {},
+      "ended": {}
+    },
+    "displayedAttribute": "id"
+  }
+}

@@ -48,9 +48,23 @@ module.exports = {
 
   create: function * () {
     this.model = model;
+    strapi.log.info(this.request.body.client);
+    const email = this.request.body.client;
+    const message = this.request.body.message;
+    const orderId = this.request.body.orderId;
     try {
       let entry = yield strapi.hooks.blueprints.create(this);
       this.body = entry;
+      try {
+      yield strapi.api.email.services.email.send({
+       from: email,
+       subject: 'Order ' + orderId,
+       text: "Message: " + message,
+       html: "<b> Message: </b>" + message,
+     });
+   } catch (err) {
+   strapi.log.info(err);
+   }
     } catch (err) {
       this.body = err;
     }

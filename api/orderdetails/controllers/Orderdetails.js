@@ -27,7 +27,7 @@ module.exports = {
   findDetails: function * () {
     this.model = model;
     try {
-      let entry = yield strapi.hooks.blueprints.find({orderId: "5a746a525ea9e4e5216dd35a"});
+      let entry = yield strapi.hooks.blueprints.find(this);
       this.body = entry;
       strapi.log.info(entry);
     } catch (err) {
@@ -72,6 +72,7 @@ module.exports = {
       this.body = err;
     }
   },
+
 
   /**
    * Update a Orderdetails entry.

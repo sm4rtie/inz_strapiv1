@@ -11,8 +11,11 @@
     "state": {
       "type": "text"
     },
-    "version": {
-      "type": "integer"
+    "city": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "text"
     },
     "createdBy": {
       "model": "user"

@@ -230,7 +230,7 @@ module.exports = {
         message: err.message
       };
     }
-    strapi.log.info(user.email);
+  //  strapi.log.info(user.email);
     // Send an email to the user.
     try {
       yield strapi.api.email.services.email.send({

@@ -25,9 +25,10 @@ module.exports = {
    */
 
    send: function * (options, cb) {
+
      var data = {
     from: options.from || '"Administration Panel" <no-reply@strapi.io>',
-    to: options.to,
+    to: options.to || 'marta.jareckaa@gmail.com',
     subject: options.subject,
     text: options.text,
     html: options.html

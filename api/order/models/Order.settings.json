@@ -17,16 +17,8 @@
     "ended": {
       "type": "date"
     },
-    "lang": {
-      "type": "string",
-      "required": true
-    },
-    "template": {
-      "type": "string",
-      "required": true
-    },
-    "id_ref": {
-      "type": "int"
+    "damage": {
+      "type": "text"
     },
     "createdBy": {
       "model": "user"
@@ -47,6 +39,17 @@
     },
     "employee": {
       "model": "user"
+    },
+    "lang": {
+      "type": "string",
+      "required": true
+    },
+    "template": {
+      "type": "string",
+      "required": true
+    },
+    "id_ref": {
+      "type": "int"
     }
   },
   "autoCreatedAt": true,
@@ -55,12 +58,6 @@
   "templates": {
     "default": {
       "attributes": {
-        "client": {
-          "type": "string"
-        },
-        "employee": {
-          "type": "string"
-        },
         "product": {
           "type": "string"
         },

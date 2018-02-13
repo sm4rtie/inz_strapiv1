@@ -107,7 +107,7 @@ module.exports = {
   // Before creating a value.
    beforeCreate: function (values, next) {
      var v;
-     var entry = Orderdetails.findOne().where({orderId: values.orderId}).sort({version: -1}).exec(function(error, orders){
+     Orderdetails.findOne().where({orderId: values.orderId}).sort({version: -1}).exec(function(error, orders){
        if(error) { strapi.log.info(error); next(); }
        if(!orders) next();
       // strapi.log.info(orders.size());
@@ -117,13 +117,16 @@ module.exports = {
 
      });
     //  strapi.log.info(values.version)
+
     //  next();
    },
 
   // After creating a value.
   // afterCreate: function (newlyInsertedRecord, next) {
-  //   next();
-  // },
+
+//next();
+
+//   }
 
   /**
    * Lifecycle callbacks on update

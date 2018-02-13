@@ -1,9 +1,13 @@
 {
   "default": {
     "attributes": {
-      "date": {},
-      "state": {},
-      "version": {}
+      "date": {
+        "required": true
+      },
+      "state": {
+        "required": true
+      },
+      "city": {}
     },
     "displayedAttribute": "id"
   }

@@ -37,8 +37,25 @@ module.exports = {
   // Create a new entry.
   create: function * () {
     try {
+      var url = this.url;
       const entry = yield strapi.hooks.blueprints.create(this);
       this.body = entry;
+      if(url === "/admin/explorer/orderdetails") {
+      var order =  yield Order.findOne({id: this.body.orderId.id});
+      var user = yield User.findOne({id: order.client});
+      var state = this.body.state;
+        try {
+        yield strapi.api.email.services.email.send({
+         to: user.email,
+         subject: 'Order status changed',
+         text: 'Status: ' + state,
+         html: '<b>Status:</b> ' + state
+       });
+     } catch (err) {
+     strapi.log.info(err);
+     }
+   }
+
     } catch (err) {
       this.body = err;
     }

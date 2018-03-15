@@ -1,17 +1,31 @@
 {
   "routes": {
+    "GET /inbox": {
+      "controller": "Contact",
+      "action": "inbox",
+      "policies": [
+
+      ]
+    },
+    "GET /inbox/:id": {
+      "controller": "Contact",
+      "action": "getMessage",
+      "policies": [
+
+      ]
+    },
     "GET /contact": {
       "controller": "Contact",
       "action": "find",
       "policies": [
-        "isAuthorized"
+
       ]
     },
     "GET /contact/:id": {
       "controller": "Contact",
       "action": "findOne",
       "policies": [
-        "isAuthorized"
+
       ]
     },
     "POST /contact": {
@@ -26,8 +40,7 @@
       "controller": "Contact",
       "action": "update",
       "policies": [
-        "isAuthorized",
-        "addDataUpdate"
+
       ]
     },
     "DELETE /contact/:id": {

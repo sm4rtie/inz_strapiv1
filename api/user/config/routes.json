@@ -14,6 +14,14 @@
 
       },
 
+              "GET /manage/users": {
+                "controller": "User",
+              "action": "manageUsers",
+
+                "policies": []
+
+            },
+
         "GET /login": {
       "controller": "User",
         "action": "login",
@@ -26,12 +34,16 @@
         "action": "editUser",
           "policies": []
       },
-
+      "GET /findclients": {
+        "controller": "User",
+        "action": "findClients",
+        "policies": [
+        ]
+      },
     "GET /user": {
       "controller": "User",
       "action": "find",
       "policies": [
-        "isAuthorized"
       ]
     },
     "GET /user/:id": {
@@ -47,7 +59,7 @@
       "policies": [
         "isAuthorized",
         "addDataCreate",
-        "deleteRoles"
+        "userAddOrRemoveRole"
       ]
     },
     "PUT /user/:id": {

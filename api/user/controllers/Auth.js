@@ -126,7 +126,7 @@ module.exports = {
       template: 'default',
       provider: 'local'
     });
-
+strapi.log.info(params);
     // Password is required.
     if (!params.password) {
       ctx.status = 400;
@@ -171,6 +171,7 @@ module.exports = {
         user: user
       };
     } catch (err) {
+      console.log(err);
       ctx.status = 500;
       return ctx.body = {
         message: err.message

@@ -108,7 +108,6 @@ module.exports = {
 
     // Map the list of roles.
     const authorizedRoles = _.isArray(route.roles) ? _.map(route.roles, 'name') : [];
-
     let entry;
     // Owner policy.
     if (_ctx.request.route.controller && route.contributorsAuthorized === true) {

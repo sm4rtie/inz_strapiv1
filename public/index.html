@@ -1,171 +1,73 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
 
-<html>
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Welcome to your Strapi application</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Serwis</title>
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
     <style>
-      * {
-        -webkit-box-sizing: border-box;
-      }
-
-      body, html {
-        margin: 0;
-        padding: 40px 0;
-      }
-
       body {
-        font: 17px/1.5 "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
-        background: white;
-        margin: 0;
-        color: #33333d;
-        overflow-y: scroll;
-        overflow-x: hidden;
+        padding-top: 54px;
       }
-
-      h1 {
-        font-size: 1.6em;
-        margin-top: 0;
-      }
-
-      h2 {
-        margin-top: 44px;
-        font-size: 1.3em;
-      }
-
-      h3 {
-        margin-top: 30px;
-        font-size: 1em;
-      }
-
-      section {
-        margin: 0 5.555555555555555%;
-      }
-
-      p {
-        font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
-      }
-
-      a {
-        color: #33a0c0;
-      }
-
-      code {
-        font-family: monospace;
-        font-size: 1.1em;
-      }
-
-      pre {
-        background: white;
-        border-top: 1px solid #eee;
-        border-bottom: 1px solid #eee;
-        padding: 25px;
-        font-family: monospace;
-        overflow-x: auto;
-      }
-
-      .wrapper {
-        padding: 0 .75em;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-      }
-
-      @media screen and (min-width:40em) {
+      @media (min-width: 992px) {
         body {
-          font-size: 1.0625em;
+          padding-top: 56px;
         }
       }
 
-      @media screen and (min-width:45em) {
-        body {
-          font-size: 1em;
-        }
-      }
-
-      @media screen and (min-width:55.5em) {
-        body {
-          font-size: 1.0625em;
-        }
-      }
-
-      @media screen and (min-width:61.5em) {
-        body {
-          font-size: 1em;
-        }
-        section {
-          margin: 0 16.666666666666664%;
-        }
-      }
-
-      @media screen and (min-width:75em) {
-        body {
-          font-size: 1.0625em;
-        }
-      }
-
-      @media screen and (min-width:87em) {
-        body {
-          font-size: 1em;
-        }
-        section {
-          margin: 0 27.77777777777778%;
-        }
-      }
-
-      @media screen and (min-width:105em) {
-        body {
-          font-size: 1.0625em;
-        }
-      }
-
-      @media screen and (min-width:117em) {
-        section {
-          margin: 0 5.555555555555555%;
-        }
-        section .wrapper {
-          width: 37.5%;
-          margin-left: 25%;
-        }
-      }
-
-      @media screen and (min-width:130em) {
-        body {
-          font-size: 1.125em;
-          max-width: 160em;
-        }
-      }
     </style>
+
   </head>
-  <body lang="en">
-    <section>
-      <div class="wrapper">
-        <h1>Welcome.</h1>
-        <p>You successfully created your Strapi application.</p>
-        <p>You are looking at: <code>./public/index.html</code>.</p>
-        <p>Your built-in admin panel is available at <a href="http://localhost:1337/admin/" target="blank">http://localhost:1337/admin/</a>.
-        <h2>Create your first API</h2>
-        <p>The Strapi ecosystem offers you two possibilities to create a complete RESTful API.</p>
-        <h3>Via the CLI</h3>
-        <p>Easily generate a complete API with controllers, models and routes using:</p>
-        <pre><code class="lang-bash">$ strapi generate api &lt;apiName&gt;</code></pre>
-        <p>For example, you can create a <code class="lang-bash">car</code> API with a name (<code class="lang-bash">name</code>), year (<code class="lang-bash">year</code>) and the license plate (<code class="lang-bash">license</code>) with:</p>
-        <pre><code class="lang-bash">$ strapi generate api car name:string year:integer license:string</code></pre>
-        <h3>Via the Strapi Studio</h3>
-        <p>The Strapi Studio allows you to easily build and manage your application environment thanks to a powerful User Interface.</p>
-        <p>Log into the Strapi Studio with your user account (<a href="http://studio.strapi.io/" target="blank">http://studio.strapi.io</a>) and follow the instructions to start the experience.</p>
-        <h2>Resources</h2>
-        <p>You'll probably also want to learn how to customize your application, set up security and configure your data sources.</p>
-        <p>For more help getting started, check out:
-          <ul>
-            <li><a href="http://strapi.io/documentation/introduction" target="blank">Strapi documentation</a></li>
-            <li><a href="https://github.com/wistityhq/strapi" target="blank">Strapi repository on GitHub</a></li>
-            <li><a href="https://twitter.com/strapijs" target="blank">Strapi news on Twitter</a></li>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/makecontact" id="contactHref" name="contactHref">Contact</a>
+            </li>
           </ul>
-        </p>
+        </div>
       </div>
-    </section>
+    </nav>
+    <!-- Page Content -->
+      <div class="jumbotron jumbotron fluid" style="margin-top:20px">
+          <div class="container">
+            <div class="h-100 d-inline-block">
+            <div class="w-75 p-3">
+
+    <h1 class="display-3">Serwis</h1>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <hr class="my-4">
+    <p><a class="btn btn-primary btn-lg" href="/login" style='margin-right: 10px' role="button">Log in</a>
+      to track your order.</p>
+
+
+  </div>
+  </div>
   </body>
 </html>

@@ -12,7 +12,9 @@
       "type": "date"
     },
     "status": {
-      "type": "array"
+      "type": "string",
+      "enum": ["Admitted", "In process", "Finished"],
+      "defaultsTo": "Admitted"
     },
     "ended": {
       "type": "date"

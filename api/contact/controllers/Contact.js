@@ -7,13 +7,24 @@ const model = 'contact';
  */
 
 module.exports = {
+  inbox: function * () {
 
+  yield this.render('manage/notifications.ejs');
+  },
   /**
    * Get Contact entries.
    *
    * @return {Object|Array}
    */
+   getMessage: function * () {
 
+   yield this.render('manage/notification.ejs');
+   },
+   /**
+    * Get Contact entries.
+    *
+    * @return {Object|Array}
+    */
   find: function * () {
     this.model = model;
     try {

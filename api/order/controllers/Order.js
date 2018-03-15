@@ -7,7 +7,16 @@ const model = 'order';
  */
 
 module.exports = {
+  manageOrders: function * () {
 
+  yield this.render('manage/orders.ejs');
+  },
+  manageOrder: function * () {
+    var orderdetails = strapi.models.orderdetails.attributes.state.enum;
+    strapi.log.info(orderdetails);
+  yield this.render('manage/order.ejs', {states: orderdetails});
+
+  },
   /**
    * Get Order entries.
    *

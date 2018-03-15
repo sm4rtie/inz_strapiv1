@@ -45,6 +45,15 @@
       "type": "string",
       "minLength": 6
     },
+    "streetAddress": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "zipCode": {
+      "type": "string"
+    },
     "resetPasswordToken": {
       "type": "string"
     },
@@ -69,6 +78,7 @@
       "collection": "orderdetails",
       "via": "contributors"
     }
+
   },
   "autoCreatedAt": true,
   "autoUpdatedAt": true,

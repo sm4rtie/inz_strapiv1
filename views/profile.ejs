@@ -1,4 +1,4 @@
-o<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -8,7 +8,7 @@ o<!DOCTYPE html>
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Log in</title>
+    <title>Profile</title>
 
     <!-- Bootstrap core CSS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -23,7 +23,7 @@ o<!DOCTYPE html>
 
 <body lang="en">
 <section>
-  <div class="wrapper">
+
     <script>
 
       /*    $.ajax({
@@ -68,9 +68,7 @@ o<!DOCTYPE html>
       });*/
   //    function findOrders() {
 
-  function newLocation(adURL){
-  window.location.href = "/orderdetails2/"+adURL;
-  }
+
      $.ajax({
        //url: "http://localhost:1337/order"+JSON.parse(sessionStorage.getItem("userId")),
        url: "http://localhost:1337/order?where=\{%22client%22:%22" + JSON.parse(sessionStorage.getItem("userId"))+ "%22\}",
@@ -87,9 +85,7 @@ o<!DOCTYPE html>
       },
       //contentType: 'application/json; charset=utf-8',
       success: function (order) {
-        console.log(JSON.stringify(order));
        order.forEach(function(item,index){
-                  console.log(item.client);
           $('#orderInfo').append('<tr>'+
       '<td><a href="/details/'+item.id+'">'+item.id+'</a></td>'+
       '<td>'+item.product+'</td>'+

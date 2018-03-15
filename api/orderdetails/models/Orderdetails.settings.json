@@ -9,7 +9,8 @@
       "type": "date"
     },
     "state": {
-      "type": "text"
+       "type": "string",
+      "enum": ["Admitted", "Local repair", "Decision to send to producent", "In transit to producent", "Warrancy repair", "Refusal", "In transit to service", "Ready for receipt"]
     },
     "city": {
       "type": "string"

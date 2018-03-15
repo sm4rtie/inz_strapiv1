@@ -11,6 +11,13 @@
     "message": {
       "type": "text"
     },
+    "read": {
+      "type": "boolean",
+      "defaultsTo": "false"
+    },
+    "response": {
+      "type": "text"
+    },
     "lang": {
       "type": "string",
       "required": true

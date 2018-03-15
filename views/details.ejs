@@ -21,15 +21,17 @@
 <div>
 <%- include('partials/navbar') %>
 </div>
-
+<div style="margin-top:20px">
 <h2 class="text-center"> Details </h2>
+</div>
 <div class="container">
   <div id="addInfo">
   </div>
     <div class="center-block">
         <div class="col-xs-4 col-xs-offset-8 center">
-<table id="details" name="details" class="table table-sm">
+<table id="details" name="details" class="table table-sm ">
 </table>
+<hr>
 <form id="contact" name="contact">
 <div class="form-group">
   <label for="message">Contact:</label>
@@ -41,6 +43,10 @@
 
 </div>
 </form>
+</div>
+</div>
+</div>
+</div>
 <script>
 function findDetails(){
   str = window.location.pathname;
@@ -56,7 +62,7 @@ function sendContact(){
      'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
    },
    data: {
-    orderId: findDetails(),
+    order: findDetails(),
     client: JSON.parse(sessionStorage.getItem("userEmail")),
     message: $('#message').val()
    },

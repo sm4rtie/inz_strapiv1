@@ -1,5 +1,19 @@
 {
   "routes": {
+    "GET /manage/orders": {
+      "controller": "Order",
+      "action": "manageOrders",
+      "policies": [
+
+      ]
+    },
+    "GET /manage/order/:id": {
+      "controller": "Order",
+      "action": "manageOrder",
+      "policies": [
+
+      ]
+    },
     "GET /order": {
       "controller": "Order",
       "action": "find",
@@ -18,8 +32,7 @@
       "controller": "Order",
       "action": "create",
       "policies": [
-        "isAuthorized",
-        "addDataCreate"
+
       ]
     },
     "PUT /order/:id": {

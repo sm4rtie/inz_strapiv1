@@ -5,7 +5,52 @@ const model = 'user';
 /**
  * A set of functions called "actions" for `user`
  */
+   function getClients (callback){
+   var clients = {};
+  User.find()
+  .populate('roles', {id:'3'}, function(err,users){
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, users);
+    }
+  });
 
+    //console.log(users);
+   /// .then(undefined, function(err){
+          //Handle error
+   //     });
+    //console.log(users);
+ /*   users.forEach(function(entry) {
+    //console.log(entry.roles);
+    (entry.roles).forEach(function(role){
+      if(role){
+        clients.push(entry);
+      //console.log(entry);
+    }
+    });
+  });*/
+  //clients = users;
+  // return users;
+
+
+  /*.exec(function (err, users) {
+  if (err) {
+    console.log(err);
+  }
+  //console.log(users);
+  users.forEach(function(entry) {
+  //console.log(entry.roles);
+  (entry.roles).forEach(function(role){
+    if(role){
+      clients.push(entry);
+    //console.log(entry);
+  }
+});
+ });
+ });*/
+
+ }
 module.exports = {
 
   /**
@@ -53,6 +98,7 @@ module.exports = {
       this.body = entry;
     } catch (err) {
       this.body = err;
+      console.log(err);
     }
   },
 
@@ -124,9 +170,14 @@ module.exports = {
     }
   },
   profile: function * () {
-    const ctx = this;
-    strapi.log.info(ctx.user);
+
    yield this.render('profile.ejs');
+  },
+
+  manageUsers: function * () {
+
+   yield this.render('manage/users.ejs');
+
   },
   login: function * () {
 

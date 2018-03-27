@@ -40,9 +40,15 @@ $(document).ready(function () {
   },
   "dataSrc": function ( json ) {
     //Make your callback here.
-    console.log(JSON.stringify(json[0].client));
+    var orders = [];
+    console.log(json);
+    //Make your callback here.
+    json.forEach(function(entry) {
+    if(entry.employee.id === JSON.parse(sessionStorage.getItem("userId")))
+    orders.push(entry);
+  });
 
-    return json;
+    return orders;
 }
 
   },
@@ -54,8 +60,9 @@ $(document).ready(function () {
     { data: 'client.email' },
     { data: 'createdAt' },
     { data: 'product' },
+    { data: 'damage' },
     { data: 'status' },
-    { data: 'employee.email' }
+
 
 ]
 //  error: function (error) {
@@ -119,10 +126,8 @@ $(document).ready(function () {
 });
 //}
 </script>
-<h2 class="text-center"> Tickets </h2>
 <div class="container">
-    <div class="center-block">
-        <div class="col-xs-4 col-xs-offset-8 center">
+    <div class="tabela">
           <div id="accordion">
             <div class="card">
               <div class="card-header" id="headingOne">
@@ -134,16 +139,16 @@ $(document).ready(function () {
               </div>
               <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
+                    <div class="table-responsive">
 <table id="orderInfo" name="orderInfo" class="table">
   <thead>
-    <tr>
     <th>ID</th>
     <th>Client</th>
     <th>Admitted</th>
     <th>Product</th>
+    <th>Damage</th>
     <th>Status</th>
-    <th>Employee</th>
-  </tr>
+
   </thead>
   <tbody>
   </tbody>
@@ -185,8 +190,10 @@ $(document).ready(function () {
          </div>
             </div>
                     <div class="form-group">
-              <button type="button" class="btn btn-def btn-block" onclick="createTicket()">Create</button>
+                      <div class="text-center">
+              <button type="button" class="btn btn-primary" onclick="createTicket()">Create</button>
             </div>
+          </div>
        </form>
      </div>
    </div>

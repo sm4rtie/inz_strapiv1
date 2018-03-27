@@ -10,14 +10,17 @@
 
     <title>Inbox</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.16/af-2.2.2/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/cr-1.4.1/fc-3.2.4/fh-3.1.3/kt-2.3.2/r-2.2.1/rg-1.0.2/rr-1.2.3/sc-1.4.4/sl-1.2.5/datatables.min.css"/>
     <link rel="stylesheet" type="text/css" href="../styles/inbox.css"/>
 
-    <!-- Bootstrap core CSS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
 <style>
 .bold {
   font-weight:bold;
@@ -30,38 +33,97 @@
 </div>
 <script>
 $(document).ready(function () {
+
   str = window.location.pathname;
   var n = str.lastIndexOf('/');
   var result = str.substring(n+1);
-  console.log(result);
+  var id = 0;
   $.ajax({
     type: 'GET', // define the type of HTTP verb we want to use (POST for our form)
-    url: '/contact/' + result, // the url where we want to POST
+    url: '/contact?populate=order', // the url where we want to POST
         headers: {
           'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
         },
     success: function(data) { //any name you put in as an argument here will be the json response string.
-    if(data.read==="false"){
-      $.ajax({
-        type: 'PUT', // define the type of HTTP verb we want to use (POST for our form)
-        url: '/contact/' + result, // the url where we want to POST
-            headers: {
-              'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
-            },
-        data: {
-          read: 'true',
-        }, // our data object
 
-      success: function(data) { //any name you put in as an argument here will be the json response string.
-        console.log(data);
-    },
-    error: function (error) {
-     // alert('nay');
-      console.log(error);
-      //window.location = "/edituser";
+      console.log(data);
+      data.forEach(function(item,index){
+        var $orderId;
+        if(item.id == result) {
+          $('#ticketId').append(item.order.id);
+          $("#id").append(item.order.id);
+          id = item.order.id;
+          console.log(id);
+          console.log(window.globalVar);
+          if(!item.read){
+          $.ajax({
+            type: 'PUT', // define the type of HTTP verb we want to use (POST for our form)
+            url: '/contact/' + item.id, // the url where we want to POST
+                headers: {
+                  'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
+                },
+            data: {
+              read: 'true',
+            }, // our data object
+
+          success: function(send) { //any name you put in as an argument here will be the json response string.
+
+        },
+        error: function (error) {
+         // alert('nay');
+          console.log(error);
+          //window.location = "/edituser";
+        }
+      });
     }
-  });
-    }
+          $("#from").append(" "+item.client+"");
+          $("#mail-message").append("<p>"+item.message+"</p>");
+          var el = document.getElementById('previous'),
+          elChild = document.createElement('div');
+          if(item.response) {
+              elChild.innerHTML += "<ul class='chat'><li class='left clearfix'>" +
+              "<span class='glyphicon glyphicon-envelope'></span>" +
+              "<div class='chat-body clearfix'>" +
+                "<div class='header'>" +
+                  "<strong class='primary-font'> Me </strong> "+
+                "  <small class='pull-right text-muted'> "+ item.updatedAt+""  +
+                    "<span class='glyphicon glyphicon-time'></span></small>" +
+                    "</div> <p> "+ item.response+" </p></div></li></ul>" ;
+      el.appendChild(elChild);
+        }
+
+}
+        else {
+          if(item.order.id==='5ab978f41dd4622a52c76fa0') {
+          var el = document.getElementById('previous'),
+          elChild = document.createElement('div');
+
+          elChild.innerHTML += "<ul class='chat'><li class='left clearfix'><span class='glyphicon glyphicon-user'></span>" +
+                "<div class='chat-body clearfix'>" +
+                  "<div class='header'>" +
+                    "<strong class='primary-font'> "+  item.client +" </strong>" +
+                    "<small class='pull-right text-muted'> "+ item.createdAt +" " +
+                      "<span class='glyphicon glyphicon-time'></span></small>" +
+                  "  </div><p> "+ item.message +" </p></div></li>";
+                  el.appendChild(elChild);
+                  console.log("RESPONSE" + item.response);
+                if(item.response) {
+                    elChild.innerHTML += "<li class='left clearfix'>" +
+                    "<span class='glyphicon glyphicon-envelope'></span>" +
+                    "<div class='chat-body clearfix'>" +
+                      "<div class='header'>" +
+                        "<strong class='primary-font'> Me </strong> "+
+                      "  <small class='pull-right text-muted'> "+ item.updatedAt+""  +
+                          "<span class='glyphicon glyphicon-time'></span></small>" +
+                          "</div> <p> "+ item.response+" </p></div></li></ul>" ;
+el.appendChild(elChild);
+        }
+
+      }
+}
+
+
+});
 },
 error: function (error) {
  // alert('nay');
@@ -69,82 +131,76 @@ error: function (error) {
   //window.location = "/edituser";
 }
 });
-/*
-    $.ajax({
-      type: 'PUT', // define the type of HTTP verb we want to use (POST for our form)
-      url: '/contact/' + result, // the url where we want to POST
-          headers: {
-            'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
-          },
-      data: {
-        read: 'true',
-      }, // our data object
 
-    success: function(data) { //any name you put in as an argument here will be the json response string.
-      console.log(data);
-  },
-  error: function (error) {
-   // alert('nay');
-    console.log(error);
-    //window.location = "/edituser";
-  }
-});*/
 });
+
+function sendContact(){
+  str = window.location.pathname;
+  var n = str.lastIndexOf('/');
+  var result = str.substring(n+1);
+  alert("aa");
+  $.ajax({
+   url: "/contact/" + result,
+   type: 'PUT',
+   headers: {
+     'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
+   },
+   data: {
+    model: 'contact',
+    response: $('#response').val()
+   },
+   success: function (data) {
+     //window.location.replace("/me.html");
+   },
+   error: function (error) {
+     console.log(error);
+     alert(error);
+   }
+  });
+
+}
 </script>
 <p></p>
 <div class="container">
-    <div class="center-block">
-        <div class="col-xs-4 col-xs-offset-8 center">
+<div class="tabela">
           <ul class="chat">
-            <div class="bg-info">
+            <div class="bg-info-color">
               <li class="left clearfix">
                 <div class="chat-body clearfix">
                   <div class="header">
-                    <h4><strong class="primary-font"> Ticket: </strong></h4>
-                    <strong class="primary-font"> From:</strong>
-                    <small class="pull-right text-muted"> #{mail.createdAt}
+                    <input type="hidden" id='id'>
+                    <h4 id="ticketId"><strong class="primary-font"> Ticket: </strong></h4>
+                    <strong class="primary-font" id="from"> From:</strong>
+                    <small class="pull-right text-muted" id="time">
                       <span class="glyphicon glyphicon-time">
                       </small>
                       </div>
-                  <p> #{mail.message.md}</p>
+                  <p id="mail-message"> </p>
                 </div>
                 </li>
                 </div>
+
+                <div class="previous" id="previous"></div>
                 </ul>
-            if(previous)
-              each prev in previous
-                li(class="left clearfix")
-                  span(class="glyphicon glyphicon-user")
-                  div(class="chat-body clearfix")
-                    div(class="header")
-                      strong(class="primary-font") #{prev.from}
-                      small(class="pull-right text-muted") #{prev.createdAt}
-                        span(class="glyphicon glyphicon-time")
-                    p #{prev.message.md}
-                  if(prev.response)
-                    li(class="left clearfix")
-                      span(class="glyphicon glyphicon-envelope")
-                      div(class="chat-body clearfix")
-                        div(class="header")
-                          strong(class="primary-font") Me
-                          small(class="pull-right text-muted") #{prev.responseAt}
-                            span(class="glyphicon glyphicon-time")
-                        p #{prev.response}
-          hr
-          div
-            .row: .col-sm-8.col-md-6
-              form(method='post' id='formularz')
-                input(type='hidden', name='action', value='reply')
-                .form-group
-                  //(class=validationErrors.message ? 'has-error' : null)
-                  label Reply
-                  textarea(name='response' rows=4).form-control= formData.response
-                .form-actions
-                  button(type='submit').btn.btn-primary Send
+                <hr>
+                <form id="contact" name="contact">
+                <div class="form-group">
+                  <label for="message">Contact:</label>
+                  <textarea class="form-control" rows="5" id="response" name="response"></textarea>
+                </div>
+                <div class="form-group">
+                <!--  <button type="button" class="btn btn-def btn-block" onclick="sendContact()">Send</button>-->
+                <button type="button" class="btn btn-primary" onclick="sendContact()">Submit</button>
+
+                </div>
+                </form>
 
 </div>
 </div>
-</div>
+
+<script>
+
+</script>
 </body>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>

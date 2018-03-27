@@ -211,13 +211,14 @@
 .easy-autocomplete.eac-custom input {
   border: 1px solid #888;
   border-radius: 2px;
-  color: #888;
+  color: #555555;
   font-family: inherit;
   font-size: 16px;
   font-weight: 400;
   margin: 0;
+  width: 860px;
   min-width: 300px;
-  max-width: 500px;
+  max-width: 1500px;
   padding: 2px;
 }
 .easy-autocomplete.eac-custom input:hover, .easy-autocomplete.eac-custom input:focus {

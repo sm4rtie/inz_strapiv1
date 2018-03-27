@@ -86,8 +86,7 @@ $(document).ready(function () {
 //}
 </script>
 <div class="container">
-    <div class="center-block">
-        <div class="col-xs-4 col-xs-offset-8 center">
+  <div class="tabela">
   <div id="accordion">
     <div class="card">
       <div class="card-header" id="headingOne">
@@ -186,8 +185,10 @@ $(document).ready(function () {
          </div>
             </div>
             <div class="form-group">
-              <button type="button" class="btn btn-def btn-block" onclick="createUser()">Create</button>
+              <div class="text-center">
+              <button type="button" class="btn btn-primary" onclick="createUser()">Create</button>
             </div>
+          </div>
        </form>
      </div>
    </div>
@@ -222,6 +223,21 @@ function createUser() {
 
   success: function(data) { //any name you put in as an argument here will be the json response string.
     console.log(data);
+    $.ajax({
+      type: 'POST',
+      url: '/auth/forgot-password',
+      data: {
+        email: 'marta.jareckaa@gmail.com',
+        url: 'http://localhost:1337/rest-password'
+      },
+      success: function() {
+        console.log('Your user received an email');
+        //window.location.href("/me.html");
+      },
+      error: function(error) {
+        console.log('An error occurred:', error);
+      }
+    });
     window.location = "/manage/users";
 },
 error: function (error) {

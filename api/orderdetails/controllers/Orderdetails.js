@@ -65,9 +65,20 @@ module.exports = {
 
   create: function * () {
     this.model = model;
+    strapi.log.info(this.email);
     try {
       let entry = yield strapi.hooks.blueprints.create(this);
       this.body = entry;
+      try {
+      yield strapi.api.email.services.email.send({
+       to: entry.email,
+       subject: 'Your warrancy detail has changed!',
+       text: "Welcome! ",
+       html: "<b> Welcome! </b>",
+     });
+    } catch (err) {
+    strapi.log.info(err);
+    }
     } catch (err) {
       this.body = err;
     }

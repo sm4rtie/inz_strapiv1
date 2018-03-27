@@ -33,7 +33,7 @@ module.exports = {
     text: options.text,
     html: options.html
   };
-  mailgun.messages().send(data, function (error, body) {
+  mailgun.messages(). send(data, function (error, body) {
     console.log(body);
     strapi.log.info(error);
 

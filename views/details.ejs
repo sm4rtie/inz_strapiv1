@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Log in</title>
+    <title>Details</title>
 
     <!-- Bootstrap core CSS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -16,37 +16,41 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/styles/inbox.css"/>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
 </head>
 <body>
 <div>
 <%- include('partials/navbar') %>
 </div>
-<div style="margin-top:20px">
-<h2 class="text-center"> Details </h2>
-</div>
+
+
+
 <div class="container">
+  <div class="tabela">
   <div id="addInfo">
   </div>
-    <div class="center-block">
-        <div class="col-xs-4 col-xs-offset-8 center">
-<table id="details" name="details" class="table table-sm ">
+<div class="table-responsive">
+<table id="details" name="details" class="table ">
 </table>
+</div>
 <hr>
+<div id="previous"></div>
 <form id="contact" name="contact">
 <div class="form-group">
   <label for="message">Contact:</label>
   <textarea class="form-control" rows="5" id="message" name="message"></textarea>
 </div>
 <div class="form-group">
-<!--  <button type="button" class="btn btn-def btn-block" onclick="sendContact()">Send</button>-->
+<div class="text-center">
   <input type="submit" class="btn btn-primary" value="Submit" onclick="sendContact()"/>
-
+</div>
 </div>
 </form>
 </div>
 </div>
-</div>
-</div>
+
 <script>
 function findDetails(){
   str = window.location.pathname;
@@ -77,6 +81,7 @@ function sendContact(){
   });
 
 }
+$(document).ready(function () {
 $.ajax({
    url: "/orderdetails?where=\{%22orderId%22:%22" + findDetails() + "%22\}",
    type: 'GET',
@@ -107,4 +112,56 @@ $.ajax({
      console.log(error);
    }
  });
+ $.ajax({
+   type: 'GET', // define the type of HTTP verb we want to use (POST for our form)
+   url: '/contact?populate=order', // the url where we want to POST
+       headers: {
+         'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
+       },
+   success: function(data) { //any name you put in as an argument here will be the json response string.
+     data.forEach(function(item,index){
+       console.log("MESSAGE" + item.message);
+       if(item.order.id == findDetails()) {
+
+         var el = document.getElementById('previous'),
+         elChild = document.createElement('div');
+
+         elChild.innerHTML += "<ul class='chat'><li class='left clearfix'><span class='glyphicon glyphicon-user'></span>" +
+               "<div class='chat-body clearfix'>" +
+                 "<div class='header'>"+
+                   "<strong class='primary-font'> Me </strong>" +
+                   "<small class='pull-right text-muted'> "+ item.createdAt +" "+
+                     "<span class='glyphicon glyphicon-time'></span></small>"+
+                 "  </div><p> "+ item.message + "</p></div></li></ul>";
+                 el.appendChild(elChild);
+
+               if(item.response) {
+               console.log(item.response);
+                   elChild.innerHTML += "<ul class='chat'><li class='left clearfix'>" +
+                   "<span class='glyphicon glyphicon-envelope'></span>" +
+                   "<div class='chat-body clearfix'>" +
+                     "<div class='header'>" +
+                       "<strong class='primary-font'> Serwis </strong> "+
+                     "<small class='pull-right text-muted'> "+ item.updatedAt+""  +
+                         "<span class='glyphicon glyphicon-time'></span></small>" +
+                         "</div> <p> "+ item.response+" </p></div></li></ul> " ;
+el.appendChild(elChild);
+}
+
+       }
+     });
+
+     console.log(data);
+
+},
+error: function (error) {
+// alert('nay');
+ console.log(error);
+ //window.location = "/edituser";
+}
+});
+
+});
 </script>
+</body>
+</html>

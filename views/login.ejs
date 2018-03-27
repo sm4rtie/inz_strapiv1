@@ -4,11 +4,10 @@
   <head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Log in</title>
+    <title>Sign in</title>
 
     <!-- Bootstrap core CSS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -31,7 +30,7 @@ div.well{
 
 .Absolute-Center {
   margin: auto;
-  position: absolute;
+
   top: 0; left: 0; bottom: 0; right: 0;
 }
 
@@ -41,15 +40,19 @@ div.well{
   min-width: 200px;
   max-width: 400px;
   padding: 40px;
+  border: 1px solid;
+  border-radius: 5px;
+  border-color: #eeeeee
+  background-color: white;
 }
 
 
 </style>
 <div class="container">
-  <div class="row">
+              <div class="tabela">
     <div class="Absolute-Center is-Responsive">
-      <div id="logo-container"></div>
-      <div class="col-sm-12 col-md-10 col-md-offset-1">
+
+
         <form action="" id="loginForm">
           <div class="form-group input-group">
             <input class="form-control" type="text" id='identifier' name='identifier' placeholder="username"/>
@@ -64,7 +67,7 @@ div.well{
                   </div>
           </div>
           <div class="form-group">
-            <button type="button" class="btn btn-def btn-block" onclick="sendLogIn()">Login</button>
+            <button type="button" class="btn btn-def btn-primary btn-block" onclick="sendLogIn()">Login</button>
           </div>
           <div class="form-group text-center">
             <a href="#" id="forgotPassword">Forgot Password</a>
@@ -73,7 +76,7 @@ div.well{
       </div>
     </div>
   </div>
-</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -214,9 +217,9 @@ function forgotPass(){
           'Authorization': 'Bearer ' + data.jwt
         },
     //    url: "/me.html"
-      url: "/profile"
+      url: "/warrancies"
     });
-    window.location = "/profile"
+    window.location = "/warrancies"
     //window.location = "/me.html"
     //window.location = "/profile"
   }).fail(function(errorData){

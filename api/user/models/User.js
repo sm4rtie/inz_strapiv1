@@ -121,5 +121,6 @@ module.exports = {
   // Before update.
   beforeUpdate: function (user, next) {
     strapi.api.user.services.user.hashPassword(user, next);
-  }
+  },
+
 };

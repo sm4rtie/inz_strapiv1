@@ -5,8 +5,14 @@
     "action": "newPassword",
     "policies": []
     },
+    "GET /": {
+      "controller": "User",
+    "action": "index",
 
-        "GET /profile": {
+      "policies": []
+
+  },
+        "GET /warrancies": {
           "controller": "User",
         "action": "profile",
 

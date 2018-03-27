@@ -150,7 +150,16 @@ strapi.log.info(params);
 
       // Create the user
       let user = yield User.create(params);
-
+      try {
+      yield strapi.api.email.services.email.send({
+       to: user.email,
+       subject: 'Welcome to serwis.com!',
+       text: "Welcome! ",
+       html: "<b> Welcome! </b>",
+     });
+    } catch (err) {
+    strapi.log.info(err);
+    }
       // Check if the user is the first to register
       if (usersCount === 0) {
         // Find the roles

@@ -93,9 +93,12 @@ module.exports = {
 
   create: function * () {
     this.model = model;
+
+
     try {
       const entry = yield strapi.hooks.blueprints.create(this);
       this.body = entry;
+
     } catch (err) {
       this.body = err;
       console.log(err);
@@ -173,7 +176,10 @@ module.exports = {
 
    yield this.render('profile.ejs');
   },
+  index: function * () {
 
+   yield this.render('index.ejs');
+  },
   manageUsers: function * () {
 
    yield this.render('manage/users.ejs');

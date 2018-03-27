@@ -17,24 +17,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+
+  </head>
+<body>
 <style>
 .bold {
   font-weight:bold;
 }
 </style>
-  </head>
-<body>
 <div>
 <%- include('../partials/navbar') %>
 </div>
 <script>
 $(document).ready(function () {
   $('#inbox').DataTable({
-
+"order": [[ 0, "desc" ]],
     "ajax": {
   type: 'GET',
    //url: "http://localhost:1337/order"+JSON.parse(sessionStorage.getItem("userId")),
-   url: "http://localhost:1337/contact?populate=order",
+   url: "http://localhost:1337/contact?populate=order&sort=createdAt%20desc",
 
 //  url: "http://localhost:1337/order?clientId=5a71c0e096473f03f1a86624",
 
@@ -62,7 +63,8 @@ $(document).ready(function () {
   "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
             $(nRow).attr("href", "/inbox/" + aData.id);
             $(nRow).css( 'cursor', 'pointer' );
-            if (aData.read == "false") {
+            console.log(aData.read);
+            if (!aData.read) {
               $('td', nRow).each(function(){
            $(this).addClass('bold');
        });
@@ -76,7 +78,7 @@ $(document).ready(function () {
             return nRow;
         },
   columns: [
-    { data: 'id'},
+
     { data: 'createdAt' },
     { data: 'message' },
     { data: 'client' },
@@ -95,11 +97,11 @@ $(document).ready(function () {
 </script>
 <p></p>
 <div class="container">
-    <div class="center-block">
-        <div class="col-xs-4 col-xs-offset-8 center">
+  <div class="tabela">
+    <div class="table-responsive">
 <table id="inbox" class='table table-hover'>
   <thead>
-    <th id="cntId">ID</th>
+
     <th>Date</th>
     <th>Message</th>
     <th>From</th>

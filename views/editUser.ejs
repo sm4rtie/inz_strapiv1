@@ -38,7 +38,9 @@
        $('#firstName').val(result.firstName);
       $('#lastName').val(result.lastName);
       $('#phone').val(result.phone);
-      $('#username').val(result.username);
+      $('#streetAddress').val(result.streetAddress);
+      $('#city').val(result.city);
+      $('#zipCode').val(result.zipCode);
       $('#email').val(result.email);
 
        //window.location.replace("/me.html");
@@ -49,8 +51,15 @@
    });
  //});
    </script>
-<div class="center-block">
+   <div class="container">
+  <div class="tabela">
 <form class="needs-validation" novalidate id="editForm" action="">
+  <div class="form-group row">
+    <div class="col-10">
+      <input class="form-control" type="hidden" id="email" name="email">
+      <input class="form-control" type="hidden" id="username" name="username">
+    </div>
+  </div>
 <div class="form-group row">
   <label for="firstName" class="col-2 col-form-label">First Name</label>
   <div class="col-10">
@@ -63,18 +72,33 @@
     <input class="form-control" type="text" name="lastName" id="lastName">
   </div>
 </div>
-<div class="form-group row">
-  <div class="col-10">
-    <input class="form-control" type="hidden" id="email" name="email">
-    <input class="form-control" type="hidden" id="username" name="username">
-  </div>
-</div>
+
 <div class="form-group row">
   <label for="phone" class="col-2 col-form-label">Phone</label>
   <div class="col-10">
     <input class="form-control" type="tel" id="phone" name="phone">
   </div>
 </div>
+<div class="form-group row">
+  <label for="streetAddress" class="col-2 col-form-label">Street Address</label>
+  <div class="col-10">
+    <input class="form-control" type="text" id="streetAddress" name="streetAddress">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="city" class="col-2 col-form-label">City</label>
+  <div class="col-10">
+    <input class="form-control" type="text" id="city" name="city">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="zipCode" class="col-2 col-form-label">Zip Code</label>
+  <div class="col-10">
+    <input class="form-control" type="text" id="zipCode" name="zipCode">
+  </div>
+</div>
+
+
   <!--<div class="form-group row">
   <label for="password" class="col-2 col-form-label">Password</label>
 <div class="col-10">
@@ -99,6 +123,7 @@
   <button type="button" class="btn btn-primary" onclick="updateUser()">Submit</button>
 
 </form>
+</div>
 </div>
 <script>
 //$(document).ready(function(){
@@ -133,7 +158,10 @@ $.ajax({
     phone: $('#phone').val(),
     password: $('#password').val(),
     username: $('#username').val(),
-    email: $('#email').val()
+    email: $('#email').val(),
+    streetAddress: $('#streetAddress').val(),
+    city: $('#city').val(),
+    zipCode: $('#zipCode').val()
   },
    success: function (result) {
      //alert('yay');

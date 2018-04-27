@@ -37,7 +37,19 @@ return result;
 $(document).ready(function () {
 
   $('#orderInfo').DataTable({
+    'columnDefs': [
+       {
+          'targets': 0,
+          'render': function(data, type, full, meta){
+             if(type === 'display'){
+               var trimmedString = data.substring(0, 10);
+               return trimmedString;
+             }
 
+             return data;
+          }
+       }
+    ],
     "ajax": {
       url: "/orderdetails?where=\{%22orderId%22:%22" + findDetails() + "%22\}",
       type: 'GET',
@@ -47,7 +59,7 @@ $(document).ready(function () {
       },
   "dataSrc": function ( json ) {
     //Make your callback here.
-    console.log(JSON.stringify(json[0]));
+    //console.log(JSON.stringify(json[0]));
 
     return json;
 }
@@ -66,7 +78,7 @@ $(document).ready(function () {
     //window.location.replace("/me.html");
   },
   columns: [
-    { data: 'id'},
+
     { data: 'date' },
     { data: 'state', "defaultContent": "-" },
     { data: 'city',"defaultContent": "-" },
@@ -91,7 +103,12 @@ $.ajax({
   message: $('#message').val()
  },
  success: function (data) {
-   console.log(data)
+   $('#clientName').val(data.client.firstName);
+   $('#clientLastname').val(data.client.lastName);
+   $('#product').val(data.product);
+   $('#damage').val(data.damage);
+   $('#generalState').val(data.status);
+
    //window.location.replace("/me.html");
  },
  error: function (error) {
@@ -100,7 +117,30 @@ $.ajax({
  }
 });
 });
+function update() {
+  $.ajax({
+   url: "/order/" + findDetails(),
+   type: 'PUT',
+   headers: {
+     'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
+   },
+   data: {
+     model: 'order',
+    status: $('#generalState').val(),
+    product: $('#product').val(),
+    damage: $('damage').val()
+   },
+   success: function (data) {
+location.reload();
 
+     //window.location.replace("/me.html");
+   },
+   error: function (error) {
+     console.log(error);
+
+   }
+  });
+}
 function details() {
     str = window.location.pathname;
     var n = str.lastIndexOf('/');
@@ -113,7 +153,7 @@ function details() {
      },
 
      success: function (data) {
-       console.log(data)
+
        $.ajax({
         url: "/orderdetails",
         type: 'POST',
@@ -129,7 +169,7 @@ function details() {
           'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
         },
         success: function (data) {
-          console.log(data)
+
           location.reload();
           //window.location.replace("/me.html");
         },
@@ -153,6 +193,55 @@ function details() {
 <div class="container">
   <div class="tabela">
           <div id="accordion">
+            <div class="card">
+              <div class="card-header" id="headingZero">
+                <h1 class="mb-0">
+                  <button class="btn btn-link btn-lg" data-toggle="collapse" data-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                    General
+                  </button>
+                </h1>
+              </div>
+
+              <div id="collapseZero" class="collapse" aria-labelledby="headingZero" data-parent="#accordion">
+                <div class="card-body">
+                  <form>
+                    <div class="form-group">
+                      <label>Client</label>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label hidden for="clientName">Client</label>
+                        <input type="text" class="form-control" id="clientName" disabled>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label hidden for="clientLastname">Last name </label>
+                        <input type="text" class="form-control" id="clientLastname" disabled>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="product">Product</label>
+                      <input type="text" class="form-control" id="product">
+                    </div>
+                    <div class="form-group">
+                      <label for="damage">Damage</label>
+                      <input type="text" class="form-control" id="damage">
+                    </div>
+                    <div class="form-group">
+                      <label for="generalState">Status</label>
+                      <select id="generalState" class="form-control">
+                        <option selected><%= generalState[0] %></option>
+                        <% for(var i=1; i<generalState.length; i++) {%>
+                           <option><%= generalState[i] %></option>
+                        <% } %>
+                      </select>
+                    </div>
+                    <div class="text-center">
+                      <input type="button" class="btn btn-primary" onclick=update() value="Update">
+                    </div>
+                  </form>
+          </div>
+              </div>
+            </div>
   <div class="card">
     <div class="card-header" id="headingOne">
       <h1 class="mb-0">
@@ -167,7 +256,7 @@ function details() {
 <table id="orderInfo" name="orderInfo" class="table">
   <thead>
     <tr>
-    <th>ID</th>
+
     <th>Date</th>
     <th>Status</th>
     <th>City</th>
@@ -217,7 +306,7 @@ function details() {
               <input type="text" class="form-control" id="comment">
             </div>
             <div class="text-center">
-              <input type="button" class="button btn-primary" onclick=details() value="Create">
+              <input type="button" class="btn btn-primary" onclick=details() value="Create">
             </div>
           </form>
 

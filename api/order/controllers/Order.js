@@ -13,8 +13,9 @@ module.exports = {
   },
   manageOrder: function * () {
     var orderdetails = strapi.models.orderdetails.attributes.state.enum;
-    strapi.log.info(orderdetails);
-  yield this.render('manage/order.ejs', {states: orderdetails});
+    var generalState = strapi.models.order.attributes.status.enum;
+    strapi.log.info(generalState);
+  yield this.render('manage/order.ejs', {states: orderdetails, generalState: generalState});
 
   },
   /**

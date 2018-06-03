@@ -34,17 +34,12 @@ $(document).ready(function () {
 "order": [[ 0, "desc" ]],
     "ajax": {
   type: 'GET',
-   //url: "http://localhost:1337/order"+JSON.parse(sessionStorage.getItem("userId")),
    url: "http://localhost:1337/contact?populate=order&sort=createdAt%20desc",
-
-//  url: "http://localhost:1337/order?clientId=5a71c0e096473f03f1a86624",
-
-  //dataType: 'json',
   headers: {
     'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
   },
   "dataSrc": function ( json ) {
-    //Make your callback here.
+
     json.data = [];
     var j=0;
      for ( var i=0, ien=json.length ; i<ien ; i++ ) {
@@ -54,8 +49,6 @@ $(document).ready(function () {
               j++;
         }
       }
-
-
 }
       return json.data;
 }
@@ -68,7 +61,6 @@ $(document).ready(function () {
               $('td', nRow).each(function(){
            $(this).addClass('bold');
        });
-
     }
             $(nRow).click(function(){
 
@@ -78,21 +70,11 @@ $(document).ready(function () {
             return nRow;
         },
   columns: [
-
     { data: 'createdAt' },
     { data: 'message' },
     { data: 'client' },
-
-
 ]
-//  error: function (error) {
-  //  console.log(JSON.parse(sessionStorage.getItem("jwtToken")));
-
-  //}
-
 });
-
-
 });
 </script>
 <p></p>
@@ -101,7 +83,6 @@ $(document).ready(function () {
     <div class="table-responsive">
 <table id="inbox" class='table table-hover'>
   <thead>
-
     <th>Date</th>
     <th>Message</th>
     <th>From</th>

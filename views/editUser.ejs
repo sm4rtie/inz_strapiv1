@@ -29,11 +29,9 @@
      dataType: 'json',
      headers: {
        'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
-       //Authorization: 'Bearer '+ sessionStorage.getItem("jwtToken")
      },
      contentType: 'application/json; charset=utf-8',
      success: function (result) {
-       //console.log(result);
        $('#email').val(result.email);
        $('#firstName').val(result.firstName);
       $('#lastName').val(result.lastName);
@@ -42,8 +40,8 @@
       $('#city').val(result.city);
       $('#zipCode').val(result.zipCode);
       $('#email').val(result.email);
+      $('#oldpassconf').val(result.password);
 
-       //window.location.replace("/me.html");
      },
      error: function (error) {
        console.log(error);
@@ -52,16 +50,26 @@
  //});
    </script>
    <div class="container">
+     <div class="col-md-8 col-md-offset-2">
   <div class="tabela">
+    <div class="text-center">
+    <h3>Edit your profile</h3>
+  </div>
 <form class="needs-validation" novalidate id="editForm" action="">
   <div class="form-group row">
     <div class="col-10">
-      <input class="form-control" type="hidden" id="email" name="email">
       <input class="form-control" type="hidden" id="username" name="username">
+      <input class="form-control" type="hidden" id="oldpassconf" name="oldpassconf">
     </div>
   </div>
+    <div class="form-group row">
+      <label for="email" class="col-2 col-form-label">Email</label>
+      <div class="col-10">
+        <input class="form-control" readonly type="text" id="email" name="email">
+      </div>
+  </div>
 <div class="form-group row">
-  <label for="firstName" class="col-2 col-form-label">First Name</label>
+  <label for="firstName" class="col-2 col-form-label">Name</label>
   <div class="col-10">
     <input class="form-control" type="text" id="firstName" name="firstName">
   </div>
@@ -97,22 +105,23 @@
     <input class="form-control" type="text" id="zipCode" name="zipCode">
   </div>
 </div>
-
-
-  <!--<div class="form-group row">
-  <label for="password" class="col-2 col-form-label">Password</label>
-<div class="col-10">
-    <input class="form-control" type="password" value="" id="currentPassword" name="password">
+<div class="form-group row">
+  <label for="oldPassword" class="col-2 col-form-label">Password</label>
+  <div class="col-10">
+    <input class="form-control" type="password" value="" id="oldPassword" name="oldPassword">
+    <div class="invalid-feedback">
+  Wrong password.
+      </div>
   </div>
-</div>-->
+</div>
   <div class="form-group row">
-    <label for="newPassword" class="col-2 col-form-label">New Password</label>
+    <label for="password" class="col-2 col-form-label">New Password</label>
     <div class="col-10">
       <input class="form-control" type="password" value="" id="password" name="password">
     </div>
   </div>
   <div class="form-group row">
-    <label for="newPasswordConfirm" class="col-2 col-form-label">Confirm Password</label>
+    <label for="newPasswordConfirm" class="col-2 col-form-label">Confirm New Password</label>
     <div class="col-10">
       <input class="form-control" type="password" value="" id="newPasswordConfirm" name="newPasswordConfirm">
       <div class="invalid-feedback">
@@ -120,24 +129,33 @@
         </div>
            </div>
     </div>
-  <button type="button" class="btn btn-primary" onclick="updateUser()">Submit</button>
+    <div class="text-center">
+  <button type="button" class="btn btn-primary" onclick="validateForm()">Submit</button>
 
+</div>
 </form>
 </div>
 </div>
+</div>
 <script>
-//$(document).ready(function(){
-//});
+
 function validateForm(){
-    //  $('form#editForm').submit(function(e){
-        if($('#password').val()!== $('#newPasswordConfirm').val()){
+  if($('#oldPassword').val()!== $('#oldpassconf').val()){
+      $('#oldPassword').addClass('is-invalid');
+    e.preventDefault();
+    e.stopPropagation();
+    alert('wrong pass');
+  }
+  else if($('#password').val()!== $('#newPasswordConfirm').val()){
           $('#newPasswordConfirm').addClass('is-invalid');
    e.preventDefault();
    e.stopPropagation();
    alert('prevent submit');
 }
-else { updateUser(); }
-  //  });
+
+else {
+  updateUser();
+}
 
 }
 
@@ -157,20 +175,20 @@ $.ajax({
     lastName: $('#lastName').val(),
     phone: $('#phone').val(),
     password: $('#password').val(),
-    username: $('#username').val(),
+    username: $('#email').val(),
     email: $('#email').val(),
     streetAddress: $('#streetAddress').val(),
     city: $('#city').val(),
     zipCode: $('#zipCode').val()
   },
    success: function (result) {
-     //alert('yay');
      location.reload();
    },
    error: function (error) {
-    // alert('nay');
-     console.log(error);
-     //window.location = "/edituser";
+
+$('#error').append($('#username').val() + 'aa');
+     console.log(data);
+
    }
  });
  }

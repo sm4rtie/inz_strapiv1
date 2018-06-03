@@ -72,7 +72,6 @@ function sendContact(){
    },
    success: function (data) {
      console.log(data)
-     //window.location.replace("/me.html");
    },
    error: function (error) {
      console.log(error);
@@ -99,26 +98,25 @@ $.ajax({
         $('#details').append('<tr>'+
     '<td>'+(item.date).split('T')[0]+'</td>'+
     '<td>'+item.state+'</td>' +
-  //  '<td>'+item.version+'</td>'+
 
     (item.city ? '<td>'+item.city+'</td>': '<td></td>')+
     (item.comment ? '<td>'+item.comment+'</td>': ' <td></td')+
     '</tr>')
   });
 
-     //window.location.replace("/me.html");
+
    },
    error: function (error) {
      console.log(error);
    }
  });
  $.ajax({
-   type: 'GET', // define the type of HTTP verb we want to use (POST for our form)
-   url: '/contact?populate=order', // the url where we want to POST
+   type: 'GET',
+   url: '/contact?populate=order',
        headers: {
          'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
        },
-   success: function(data) { //any name you put in as an argument here will be the json response string.
+   success: function(data) {
      data.forEach(function(item,index){
        console.log("MESSAGE" + item.message);
        if(item.order.id == findDetails()) {
@@ -155,9 +153,8 @@ el.appendChild(elChild);
 
 },
 error: function (error) {
-// alert('nay');
  console.log(error);
- //window.location = "/edituser";
+
 }
 });
 

@@ -26,60 +26,16 @@
 
     <script>
 $(document).ready(function () {
-      /*    $.ajax({
-            url: "http://localhost:1337/user/me",
-            type: 'GET',
-            dataType: 'json',
-            headers: {
-              'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("jwtToken"))
-            },
-            contentType: 'application/json; charset=utf-8',
-            done: function (result) {
-              console.log(data)
-              $('p').append(result.email);
-              // CallBack(result);
-              console.log(result)
-              //window.location.replace("/me.html");
-            },
-            fail: function (error) {
 
-            }
-          });
-*/
-  /*   $.ajax({
-        url: "http://localhost:1337/user/"+JSON.parse(sessionStorage.getItem("userId")),
-        type: 'GET',
-        dataType: 'json',
-        headers: {
-          'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
-          //Authorization: 'Bearer '+ sessionStorage.getItem("jwtToken")
-        },
-        contentType: 'application/json; charset=utf-8',
-        success: function (result) {
-          $('#email').append(result.email);
-          $('#userId').append(result.email);
-          console.log(result);
-          findOrders(result._id);
-          //window.location.replace("/me.html");
-        },
-        error: function (error) {
-          console.log(error);
-        }
-      });*/
-  //    function findOrders() {
   $('#orderInfo').DataTable({
 
     "ajax": {
-       //url: "http://localhost:1337/order"+JSON.parse(sessionStorage.getItem("userId")),
        url: "http://localhost:1337/order?where=\{%22client%22:%22" + JSON.parse(sessionStorage.getItem("userId"))+ "%22\}",
-    //  url: "http://localhost:1337/order?clientId=5a71c0e096473f03f1a86624",
       type: 'GET',
-      //dataType: 'json',
       headers: {
         'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
       },
       "dataSrc": function ( json ) {
-        //Make your callback here.
         console.log(JSON.stringify(json));
 
         return json;
@@ -96,16 +52,10 @@ $(document).ready(function () {
         { data: 'product' },
         { data: 'damage' },
 
-
-
     ]
-    //  error: function (error) {
-      //  console.log(JSON.parse(sessionStorage.getItem("jwtToken")));
-
-      //}
 
     });
-//}
+
 });
     </script>
 

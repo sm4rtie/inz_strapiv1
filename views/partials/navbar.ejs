@@ -28,7 +28,7 @@
         success: function() {
           sessionStorage.clear();
           window.location = "/"
-          //window.location.href("/me.html");
+
         },
         error: function(error) {
           console.log('An error occurred:', error);
@@ -53,8 +53,12 @@
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="nav navbar-nav navbar-right" id="navg" >
+              <li class="nav-item">
+                 <a class="nav-link" href="http://localhost:1337/profile" id="profile" name="profile">Profile</a>
+               </li>
           <div id="logged-menu"  style="display: none">
           <ul class="nav navbar-nav navbar-right" >
+
        <li class="nav-item">
           <a class="nav-link" href="http://localhost:1337/inbox" id="notifications" name="notifications">Inbox</a>
         </li>

@@ -30,18 +30,16 @@ $(document).ready(function () {
 
     "ajax": {
   type: 'GET',
-   //url: "http://localhost:1337/order"+JSON.parse(sessionStorage.getItem("userId")),
-   url: "http://localhost:1337/user?populate=roles",
-//  url: "http://localhost:1337/order?clientId=5a71c0e096473f03f1a86624",
 
-  //dataType: 'json',
+   url: "http://localhost:1337/user?populate=roles",
+
   headers: {
     'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
   },
 
   "dataSrc": function ( json ) {
     var clients = [];
-    //Make your callback here.
+
     json.forEach(function(entry) {
     if(entry.roles[0].id === 3)
     clients.push(entry);
@@ -50,19 +48,7 @@ $(document).ready(function () {
 
     return clients;
 }
-  //contentType: 'application/json; charset=utf-8',
-/*  success: function (order) {
-    console.log(order);
-   order.forEach(function(item,index){
-      $('#orderInfo').append('<tr>'+
-  '<td><a href="/details/'+item.id+'">'+item.id+'</a></td>'+
-  '<td>'+item.product+'</td>'+
-  '<td>'+item.status+'</td>'+
-  '<td>'+item.employee.email+'</td>'+
-  '</tr>')
-});*/
-  //  $('#product').append(order[0].product);
-    //window.location.replace("/me.html");
+
   },
   columns: [
     { data: 'id'},
@@ -74,16 +60,11 @@ $(document).ready(function () {
     {data: 'city', "defaultContent": "-" },
     {data: 'zipCode', "defaultContent": "-" },
 ]
-//  error: function (error) {
-  //  console.log(JSON.parse(sessionStorage.getItem("jwtToken")));
-
-  //}
 
 });
 
-
 });
-//}
+
 </script>
 <div class="container">
   <div class="tabela">
@@ -232,7 +213,6 @@ function createUser() {
       },
       success: function() {
         console.log('Your user received an email');
-        //window.location.href("/me.html");
       },
       error: function(error) {
         console.log('An error occurred:', error);
@@ -241,9 +221,7 @@ function createUser() {
     window.location = "/manage/users";
 },
 error: function (error) {
- // alert('nay');
   console.log(error);
-  //window.location = "/edituser";
 }
 });
 }

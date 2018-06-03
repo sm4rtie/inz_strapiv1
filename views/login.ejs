@@ -16,7 +16,6 @@
 <div>
 <%- include('partials/navbar') %>
 </div>
-<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
 
 <style>
 
@@ -119,7 +118,6 @@ $(function(){
         $.ajax({
           type: 'POST', //or POST
             url: '/auth/forgot-password',
-            //data: $('#sendmail').serialize(),
             data: {
               email: $('#myModal').find('input#forgottenEmail').val(),
                 url: 'http://localhost:1337/rest-password'
@@ -146,7 +144,6 @@ function forgotPass(){
     },
     success: function() {
       console.log('Your user received an email');
-      //window.location.href("/me.html");
     },
     error: function(error) {
       console.log($('#forgottenEmail').val()),
@@ -155,31 +152,7 @@ function forgotPass(){
   });
 }
   function sendLogIn() {
-   /*$.post( "http://localhost:1337/auth/local",{identifier: $('#identifier').val(), password: $('#password').val()}, function( data ) {
-      console.log(data);
-      headers: {
-        'Authorization': 'Bearer '+ data.jwt,
-      }
-      window.location.replace("/user/me?Bearer="+data.jwt);
-      $.get("http://localhost:1337/user/me")
-       $.ajax({
-         url: "http://localhost:1337/user/me",
-         type: 'GET',
-         dataType: 'json',
-         headers: {
-           'Authorization': 'Bearer '+data.jwt
-         },
-         contentType: 'application/json; charset=utf-8',
-         success: function (result) {
-           // CallBack(result);
-           console.log(result)
-           //window.location.replace("/me.html");
-         },
-         error: function (error) {
 
-         }
-       });
-    });*/
     $.ajax({
       type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
       url: '/auth/local', // the url where we want to POST
@@ -195,11 +168,7 @@ function forgotPass(){
       sessionStorage.setItem("userEmail", JSON.stringify(data.user.email));
 
       console.log(data);
-    //  sessionStorage.setItem("userId", JSON.stringify(data.id));
 
-      //document.cookie = "jwtToken=" +data.jwt;
-      //console.log(data.user._id)
-      //window.location.href("/me.html")
       $.ajaxSetup({
         headers: {
           'Authorization': 'Bearer ' + data.jwt
@@ -213,42 +182,17 @@ function forgotPass(){
         headers: {
           'Authorization': 'Bearer ' + data.jwt
         },
-    //    url: "/me.html"
+
       url: "/"
     });
     window.location = "/"
-    //window.location = "/me.html"
-    //window.location = "/profile"
+
   }).fail(function(errorData){
       console.log(errorData)
       $('#password').addClass('is-invalid');
         $('#password').val('');
     });
 
-
-
-
-
-
-    //$("login").click(function () {
-      /*$.ajax({
-        type: 'GET',
-        url: 'http://localhost:1337/auth/local',
-        data: {
-          identifier: $('#identifier').val(),
-          password: $('#password').val()
-        },
-        done: function (data) {
-          //sessionStorage.setItem("token",data.jwt);
-          window.location.href("/user/me");
-        },
-        fail: function (error) {
-          console.log('An error occurred:', error);
-
-        }
-
-      });*/
-    //});
   }
 
   </script>

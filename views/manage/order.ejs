@@ -58,24 +58,10 @@ $(document).ready(function () {
         'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
       },
   "dataSrc": function ( json ) {
-    //Make your callback here.
-    //console.log(JSON.stringify(json[0]));
 
     return json;
 }
-  //contentType: 'application/json; charset=utf-8',
-/*  success: function (order) {
-    console.log(order);
-   order.forEach(function(item,index){
-      $('#orderInfo').append('<tr>'+
-  '<td><a href="/details/'+item.id+'">'+item.id+'</a></td>'+
-  '<td>'+item.product+'</td>'+
-  '<td>'+item.status+'</td>'+
-  '<td>'+item.employee.email+'</td>'+
-  '</tr>')
-});*/
-  //  $('#product').append(order[0].product);
-    //window.location.replace("/me.html");
+
   },
   columns: [
 
@@ -85,10 +71,6 @@ $(document).ready(function () {
     { data: 'comment',"defaultContent": "-" },
 
 ]
-//  error: function (error) {
-  //  console.log(JSON.parse(sessionStorage.getItem("jwtToken")));
-
-  //}
 
 });
 $.ajax({
@@ -133,7 +115,6 @@ function update() {
    success: function (data) {
 location.reload();
 
-     //window.location.replace("/me.html");
    },
    error: function (error) {
      console.log(error);
@@ -169,25 +150,21 @@ function details() {
           'Authorization': 'Bearer '+ JSON.parse(sessionStorage.getItem("jwtToken"))
         },
         success: function (data) {
-
           location.reload();
-          //window.location.replace("/me.html");
         },
         error: function (error) {
           console.log(error);
-
         }
        });
-       //window.location.replace("/me.html");
+
      },
      error: function (error) {
        console.log(error);
-
      }
     });
 
 }
-//}
+
 </script>
 <p></p>
 <div class="container">
